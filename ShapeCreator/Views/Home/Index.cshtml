@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-9">
+            <label>Enter value</label>
+            <input style="width:100%;box-sizing:border-box;" type="text" id="txtinput" />
+
+        </div>
+
+        <br />
+
+        <div class="col-md-9">
+            <small>
+                Format of string is <b>Draw a(n) &lt;shape&gt; with a(n) &lt;measurement&gt; of &lt;amount&gt; (and a(n) &lt;measurement&gt; of &lt;amount&gt;)</b>
+            </small>
+        </div>
+        <br /><br />
+
+        <div class="col-md-9">
+            <input type="button" name="Generate" value="Generate" id="btngenerate" />
+        </div>
+    </div>
+
+</div>
+<div id="shape">
+
+</div>
+<script type="text/javascript">
+    $("#btngenerate").click(function () {
+        var inputstr = $("#txtinput").val();
+        if (inputstr.length == 0) {
+            alert("Value is empty");
+            return false;
+        }
+
+        $.ajax({
+            url: "/Home/Generate",
+            type: "GET",
+            data: { input: inputstr },
+            beforeSend: function () {
+                showLoader();
+            },
+            success: function (data) {
+                hideLoader();
+                
+                console.log('data is ' + data);
+                if (data.Error != null) {
+                    $("#shape").html(data.Error);
+                }
+                else {
+                    $("#shape").html(data);
+                }                
+            },
+            error: function (jqXhr, ajaxStatus, errorThrown) {
+                hideLoader();
+                $("#shape").html(jqXhr.responseText);
+            }
+        }
+        )
+    })//end of click button
+   
+</script>

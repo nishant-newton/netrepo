@@ -1,0 +1,26 @@
+﻿@model ShapeModel
+    <div>
+        <canvas></canvas>
+    </div>
+    <canvas id="myCanvas" class="canvas">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+    <script>
+        $(document).ready(function () {
+            //debugger;
+            var rad = @Model.Radius;
+        //var model = @Html.Raw(Json.Encode(Model));
+            var x = rad * 2;
+            var y = rad;
+        //var radius = model.Radius;
+            var c = document.getElementById('myCanvas');// $("#myCanvas");
+            c.width = rad * 2;
+            c.height = rad * 2;
+        var ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(rad, rad, rad, 0, 2 * Math.PI);
+        ctx.stroke();
+    });
+
+    </script> 

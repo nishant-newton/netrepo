@@ -1,0 +1,23 @@
+﻿@model ShapeModel
+
+<canvas id="myCanvas" class="canvas">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+
+<script>
+        $(document).ready(function () {
+        
+        var height = @Model.Height;
+        var width = @Model.Width;
+        var c = document.getElementById('myCanvas');// $("#myCanvas");
+        c.width = width * 2;
+        c.height = height * 2;
+        var x = (c.width - width) / 2;
+        var y = (c.height - height) / 2;
+        var ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.stroke();
+    });
+
+</script>
